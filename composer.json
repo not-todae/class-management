@@ -1,0 +1,17 @@
+{
+    "name": "user/pdc10-classes",
+    "autoload": {
+        "psr-4": {
+            "Models\\": "models/"
+        }
+    },
+    "authors": [
+        {
+            "name": "DavidAaronEchon",
+            "email": "echon.davidaaron@auf.edu.ph"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.4"
+    }
+}
