@@ -3,7 +3,7 @@
 namespace Models;
 use \PDO;
 
-class Teachers
+class Teacher
 {
     protected $id;
     protected $first_name;

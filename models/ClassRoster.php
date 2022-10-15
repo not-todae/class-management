@@ -3,31 +3,29 @@
 namespace Models;
 use \PDO;
 
-class ClassRecord
+class ClassRoster
 {
     protected $id;
-    protected $name;
-    protected $description;
     protected $code;
+    protected $student_number;
     protected $connection;
 
-    public function __construct($name, $description, $code)
+    public function __construct($code, $student_number)
     {
-        $this->name = $name;
-        $this->description = $description;
         $this->code = $code;
+        $this->student_number = $student_number;
     }
     public function getID()
     {
         return $this->id;
     }
-    public function getDescription()
-    {
-        return $this->description;
-    }
     public function getCode()
     {
         return $this->code;
+    }
+    public function getStudentNumber()
+    {
+        return $this->student_number;
     }
     public function setConnection($connection)
     {
@@ -36,17 +34,15 @@ class ClassRecord
     public function save()
     {
         try {
-            $sql ="INSERT INTO classes SET name=:name, description=description, code:code";
+            $sql ="INSERT INTO class_rosters SET name=:name, description=description, code:code";
             $statement = $this->connection->prepare($sql);
             $statement->execute([
-                $name,
                 $code,
-                $description,
+                $student_number,
                 $this->getID()
 			]);
-            $this->name = $name;
-            $this->description = $description;
             $this->code = $code;
+            $this->student_number = $student_number;
         } catch (Exeption $e) {
             error_log($e->getMessage());
         }
@@ -54,7 +50,7 @@ class ClassRecord
     public function delete()
 	{
 		try {
-			$sql = 'DELETE FROM classes WHERE id=?';
+			$sql = 'DELETE FROM class_rosters WHERE id=?';
 			$statement = $this->connection->prepare($sql);
 			$statement->execute([
 				$this->getId()
@@ -66,7 +62,7 @@ class ClassRecord
     public function getAll()
     {
         try{
-            $sql = 'SELECT * FROM classes';
+            $sql = 'SELECT * FROM class_rosters';
             $data = $this->connection->query($sql)->fetchAll();
             return $data;
         }catch (Exception $e){
